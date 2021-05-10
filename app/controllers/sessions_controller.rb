@@ -4,6 +4,12 @@ class SessionsController < ApplicationController
 
   def create
     login_via_cronofy(auth_hash)
+    @events = cronofy.read_events(params[:id])
+    redirect_to root_path
+  end
+
+  def destroy
+    logout
     redirect_to root_path
   end
 
