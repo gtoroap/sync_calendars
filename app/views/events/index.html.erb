@@ -1,0 +1,32 @@
+
+<div>
+  <span>Hi, <%= current_user.name %> (<%= current_user.email %>)</span>
+  <span> <%= link_to 'Sign out', session_path, method: :delete, class: 'text-blue-700' %></span>
+</div>
+<% if @events %>
+  <table class="table-auto mt-12">
+    <thead>
+    <tr class="bg-blue-100 mx-1">
+      <th class="px-6">Event Summary</th>
+      <th class="px-6">Start</th>
+      <th class="px-6">End</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @events.each do |event| %>
+        <tr>
+          <td class="px-6">
+            <%= event.summary %>
+          </td>
+          <td class="px-6">
+            <%= event.start.time.to_formatted_s(:long) %>
+          </td>
+          <td class="px-6">
+            <%= event.end.time.to_formatted_s(:long) %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

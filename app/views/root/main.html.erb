@@ -1,7 +1,6 @@
 <% if current_user %>
   <%= link_to 'Sign out', session_path, method: :delete, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
   Hi, <%= current_user.name %> (<%= current_user.email %>)
-  
 <% else %>
   <%= button_to 'Sign in to calendar', '/auth/cronofy', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
 <% end %>

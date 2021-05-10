@@ -4,8 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     login_via_cronofy(auth_hash)
-    @events = cronofy.read_events(params[:id])
-    redirect_to root_path
+    redirect_to events_path
   end
 
   def destroy
@@ -20,9 +19,10 @@ class SessionsController < ApplicationController
 
   def login_via_cronofy(auth_hash)
     user = User.find_or_create_by(cronofy_id: auth_hash["uid"])
-
     user.email = auth_hash['info']['email']
     user.name = auth_hash['info']['name']
+    user.access_token = auth_hash['credentials']['token']
+    user.refresh_token = auth_hash['credentials']['refresh_token']
     user.save
 
     login(user)
